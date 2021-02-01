@@ -13,13 +13,18 @@ window.onload = function() {
     }
 
     document.getElementById("submit-btn").addEventListener('click', (e) => {
-        console.log("ljlj");
+        //console.log("ljlj");
         let validates = document.getElementsByClassName('required');
         for(let i=0; i<validates.length;i++){
             if(validates[i].value == '' || validates[i].value == null){
+                e.preventDefault();
                 validates[i].classList.add('error');
             }
+            else{
+                validates[i].classList.remove('error');
+            }
         }
-        e.preventDefault();
+        
     });
 };
+
