@@ -5,6 +5,9 @@ window.addEventListener('load',function() {
 	let images = document.querySelectorAll("#thumbnails img");
 	let featured = document.querySelector('#featured img');
 	let caption = document.querySelector('#featured figcaption');
+	
+	// this property makes the transition whenever the opacity of the target changes
+	caption.style.transition = "opacity 1s";
 
 	for (let i=0; i<images.length; i++) {
 		images[i].addEventListener('click', function() {
@@ -19,10 +22,12 @@ window.addEventListener('load',function() {
 				break;
 			}
 		}
+		// this property sets the opacity to 80% when the mouse goes over the image
 		caption.style.opacity = 0.8;
 	});
 
 	featured.addEventListener('mouseout', function() {
+		// this property sets the opacity to 0% when the mouse goes out of the image
 		caption.style.opacity = 0;
 	});
 
