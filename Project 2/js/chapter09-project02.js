@@ -1,45 +1,34 @@
 /* Step-2 */
 
 window.addEventListener('load',function() {
-	// body...
-	let images = document.querySelectorAll("#thumbnails img");
-	let featured = document.querySelector('#featured img');
-	let caption = document.querySelector('#featured figcaption');
-	
-	// this property makes the transition whenever the opacity of the target changes
-	caption.style.transition = "opacity 1s";
+    // body...
+    let thumbnail = document.querySelector("#thumbnails");
+    let featured = document.querySelector('#featured img');
+    let caption = document.querySelector('#featured figcaption');
 
-	for (let i=0; i<images.length; i++) {
-		images[i].addEventListener('click', function() {
-			changeThumbnail(images[i]);
-		});
-	}
+    // this property makes the transition whenever the opacity of the target changes
+    caption.style.transition = "opacity 1s";
 
-	featured.addEventListener('mouseover', function() {
-		for (let i=0; i<images.length; i++) {
-			if (getRelativePath(images[i].src) == getRelativePath(featured.src)) {
-				caption.innerHTML = images[i].title;
-				break;
-			}
-		}
-		// this property sets the opacity to 80% when the mouse goes over the image
-		caption.style.opacity = 0.8;
-	});
+    thumbnail.addEventListener('click', function(e) {
+        if (e.target.nodeName.toLowerCase() == "img") {
+            let img = e.target;
+            featured.src = 'images/medium/' + getRelativePath(img.src);
+            caption.innerHTML = img.title;
+            featured.title = img.title;
+        }
+    });
 
-	featured.addEventListener('mouseout', function() {
-		// this property sets the opacity to 0% when the mouse goes out of the image
-		caption.style.opacity = 0;
-	});
+    featured.addEventListener('mouseover', function() {
+        // this property sets the opacity to 80% when the mouse goes over the image
+        caption.style.opacity = 0.8;
+    });
 
-	function changeThumbnail(img) {
-		// setting variables for thumbnail and captions
-		let imgPathArr = img.src.split("/");
-	
-		featured.src = "images/medium/" + imgPathArr[imgPathArr.length - 1];
-		caption.innerHTML = img.title;
-	}
+    featured.addEventListener('mouseout', function() {
+        // this property sets the opacity to 0% when the mouse goes out of the image
+        caption.style.opacity = 0;
+    });
 });
 
 function getRelativePath(path) {
-	return path.split('/')[path.split('/').length - 1]
+    return path.split('/')[path.split('/').length - 1]
 }
